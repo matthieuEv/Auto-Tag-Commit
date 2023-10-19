@@ -52,7 +52,7 @@ jobs:
                 console.log(`Commit name: ${commitName}`);
                 
                 // Get the previous version and split it into major, minor, and patch
-                const previousVersion = steps.previoustag.outputs.tag.split('.').map(Number);
+                const previousVersion = "${{ steps.previoustag.outputs.tag }}".split('.').map(Number);
                 let [major, minor, patch] = previousVersion;
         
                 // Determine the increment based on the commit name
