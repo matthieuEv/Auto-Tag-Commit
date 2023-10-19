@@ -4,11 +4,6 @@ branding:
   icon: 'tag'
   color: 'gray-dark'
 
-inputs:
-  token:
-    description: 'Token for the repo. This can be passed in using ${{ secrets.GITHUB_TOKEN }}'
-    required: true
-
 runs:
   using: 'composite'
   steps:
