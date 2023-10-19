@@ -82,4 +82,4 @@ jobs:
       - name: Release?
         if: steps.github-script.outputs.incrementType != ''
         run:
-            echo 'Release 🔥'
+            echo 'Release 🔥 ?'
