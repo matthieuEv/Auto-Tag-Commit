@@ -1,6 +1,3 @@
-# Fichiers de dépendances
-/node_modules
-
 # Fichiers de configuration de l'environnement
 .env
 
