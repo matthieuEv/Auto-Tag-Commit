@@ -1,0 +1,14 @@
+name: Tag creation
+on:
+    workflow_dispatch:
+    push:
+        branches:
+            - main
+
+jobs:
+    Get-Commit-Name:
+        runs-on: ubuntu-latest
+        steps:
+            - name: Get commit name
+              id: get_commit_name
+              run: echo ::set-output name=commit_name::$(git log -1 --pretty=format:"%s")
