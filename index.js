@@ -20,13 +20,11 @@ async function run() {
     // Get the previous tag
     const gitRepo = git();
     const tags = await gitRepo.tags();
-    let previousTag = "0.0.0";
-    if(tags.latest){
-        console.log(`\n🏷️ Latest tag found ➜ ${tags.latest}`);
-        previousTag = tags.latest;
-    } else {
-        console.log(`\n🏷️ No tags found, using 0.0.0 as previous version`);
-    }
+    console.log('Tags: ', tags);
+    console.log('Latest: ', tags.latest);
+
+    previousTag = tags.latest || "0.0.0";
+    console.log(`\n🏷️ Latest tag found ➜ ${tags.latest}`);
 
     // Get the previous version and split it into major, minor, and patch
     const previousVersion = previousTag.split(".").map(Number);
@@ -55,6 +53,7 @@ async function run() {
       console.log(`\n🚀 New version ➜ ${newVersion}`);
       core.setOutput("newVersion", newVersion);
       core.setOutput("makeRelease", true);
+      core.setOutput("commitName", commitName);
     } else {
       console.log(
         `\n🛑 No New Version needed`
