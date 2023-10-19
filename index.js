@@ -19,6 +19,8 @@ async function run() {
 
     // Get the previous tag
     const gitRepo = git();
+    await exec.exec("git fetch --tags");
+
     const tags = await gitRepo.tags();
     console.log('Tags: ', tags);
     console.log('Latest: ', tags.latest);
