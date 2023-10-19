@@ -20,3 +20,36 @@ jobs:
           echo "commit_name=$COMMIT_NAME" >> $GITHUB_ENV
       - name: Print GITHUB_ENV
         run: cat $GITHUB_ENV
+
+  Create-Tag:
+    runs-on: ubuntu-latest
+    needs: Get-Commit-Name
+    steps:
+      - name: Checkout
+        uses: actions/checkout@v2
+        with:
+          fetch-depth: 0
+      - name: Get Previous tag
+        id: previoustag
+        uses: "WyriHaximus/github-action-get-previous-tag@v1"
+        with:
+          fallback: 1.0.0 # steps.previoustag.outputs.tag
+      - name: Get increment from commit name
+        id: github-script
+        uses: actions/github-script@v2.1.0
+        with:
+            script: |
+                const commitName = process.env.commit_name;
+                let increment;
+                console.log(`Commit name: ${commitName}`);
+        
+                if (commitName.startsWith("fix:")) {
+                    increment = "0.0.1"; // patch
+                } else if (commitName.startsWith("feat:")) {
+                    increment = "0.1.0"; // minor
+                } else if (commitName.startsWith("BREAKING CHANGE:")) {
+                    increment = "1.0.0"; // major
+                }
+
+                console.log(`Increment: ${increment}`);
+                console.log(`Type of Increment: ${typeof increment}`);
