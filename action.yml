@@ -1,9 +1,10 @@
 name: 'Tag Creation'
+author: 'matthieuEv'
 description: 'This action creates a new tag based on the commit message.'
 branding:
   icon: 'tag'
-  color: 'gray-dark'
+  color: 'blue'
 
 runs:
-  using: 'node12'
+  using: 'node16'
   main: 'index.js'
