@@ -40,7 +40,8 @@ jobs:
         with:
             script: |
                 const commitName = process.env.commit_name;
-                let increment;
+                console.log(`Commit name: ${commitName}`);
+                let increment = "";
                 console.log(`Commit name: ${commitName}`);
         
                 if (commitName.startsWith("fix:")) {
@@ -52,4 +53,3 @@ jobs:
                 }
 
                 console.log(`Increment: ${increment}`);
-                console.log(`Type of Increment: ${typeof increment}`);
