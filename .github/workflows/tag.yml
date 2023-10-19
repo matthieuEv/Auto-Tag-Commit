@@ -1,20 +1,22 @@
 name: Tag creation
 on:
-    workflow_dispatch:
-    push:
-        branches:
-            - main
+  workflow_dispatch:
+  push:
+    branches:
+      - main
 
 jobs:
-    Get-Commit-Name:
-        runs-on: ubuntu-latest
-        steps:
-            - name: Checkout
-              uses: actions/checkout@v2
-              with:
-                  fetch-depth: 0
-            - name: Get commit name
-              id: get_commit_name
-              run: echo "commit_name=$(git log -1 --pretty=format:'%s')" >> $GITHUB_ENV
-            - name: Show commit name
-              run: cat $GITHUB_ENV
+  Get-Commit-Name:
+    runs-on: ubuntu-latest
+    steps:
+      - name: Checkout
+        uses: actions/checkout@v2
+        with:
+          fetch-depth: 0
+      - name: Get commit name
+        run: |
+          COMMIT_NAME=$(git log -1 --pretty=format:'%s')
+          echo $COMMIT_NAME
+          echo "commit_name=$COMMIT_NAME" >> $GITHUB_ENV
+      - name: Print GITHUB_ENV
+        run: cat $GITHUB_ENV
