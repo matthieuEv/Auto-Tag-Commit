@@ -75,12 +75,14 @@ jobs:
                 
                 core.setOutput("newVersion", newVersion);
 
-                if(incrementType != "")
+                if(incrementType != ""){
                     console.log(`makeRelease: true}`);
                     core.setOutput("makeRelease", true);
-                else
+                }
+                else{
                     console.log(`makeRelease: false}`);
                     core.setOutput("makeRelease", false)
+                }
 
                 console.log(`New version: ${newVersion}`);
 
