@@ -6,8 +6,8 @@ const git = require("simple-git");
 
 async function run() {
   try {
-    // Get the commit name
     let commitName;
+    console.log(`\n📝 Commit name:`);
     await exec.exec("git log -1 --pretty=format:%s", [], {
       listeners: {
         stdout: (data) => {
@@ -15,8 +15,6 @@ async function run() {
         },
       },
     });
-
-    console.log(`\n📝 Commit name: ${commitName}`);
 
     // Get the previous tag
     const gitRepo = git();
@@ -47,12 +45,12 @@ async function run() {
 
 
     if (incrementType !== "") {
-      console.log(`🚀 New version: ${newVersion}`);
+      console.log(`🚀 New version ➜ ${newVersion}`);
       core.setOutput("newVersion", newVersion);
       core.setOutput("makeRelease", true);
     } else {
       console.log(
-        `🛑 No release needed because the commit name is: ${commitName}`
+        `🛑 No release needed because the commit name is ➜ ${commitName}`
       );
     }
   } catch (error) {
