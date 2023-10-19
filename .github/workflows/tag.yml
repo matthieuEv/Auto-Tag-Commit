@@ -80,7 +80,7 @@ jobs:
                 else
                     core.setOutput("makeRelease", false)
 
-                console.log(`Increment: ${incrementType}`);
+                console.log(`makeRelease: ${makeRelease}`);
                 console.log(`New version: ${newVersion}`);
 
       - name: Release?
