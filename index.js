@@ -16,7 +16,7 @@ async function run() {
       },
     });
 
-    console.log(`📝 Commit name: **${commitName}**`);
+    console.log(`\n📝 Commit name: ${commitName}`);
 
     // Get the previous tag
     const gitRepo = git();
@@ -47,12 +47,12 @@ async function run() {
 
 
     if (incrementType !== "") {
-      console.log(`🚀 New version: **${newVersion}**`);
+      console.log(`🚀 New version: ${newVersion}`);
       core.setOutput("newVersion", newVersion);
       core.setOutput("makeRelease", true);
     } else {
       console.log(
-        `🛑 No release needed because the commit name is: **${commitName}**`
+        `🛑 No release needed because the commit name is: ${commitName}`
       );
     }
   } catch (error) {
