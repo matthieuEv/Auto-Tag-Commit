@@ -5,7 +5,5 @@ branding:
   color: 'gray-dark'
 
 runs:
-  using: 'composite'
-  steps:
-    - run: ${{ github.action_path }}/.github/workflows/tag.yml
-      shell: bash
+  using: 'node12'
+  main: 'index.js'
