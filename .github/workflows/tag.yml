@@ -78,20 +78,8 @@ jobs:
                 
                 core.setOutput("newVersion", newVersion);
                 core.setOutput("incrementType", incrementType);
-
-  Make-release:
-    needs: Create-Tag
-    runs-on: ubuntu-latest
-    if: ${{ needs.Create-Tag.outputs.incrementType != '' }}
-    steps:
-      - name: Checkout
-        uses: actions/checkout@v2
-        with:
-            fetch-depth: 0
-      - name: Create release
+                console.log(`Increment: ${incrementType}`);
+      - name: Release?
+        if: steps.github-script.outputs.incrementType != ''
         run:
-            echo "Its making a Release"
-
-
-        #   - name: Create tag
-        #     uses: matt/matt@v1
+            echo 'Release 🔥'
