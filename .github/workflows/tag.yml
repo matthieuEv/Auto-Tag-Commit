@@ -70,16 +70,20 @@ jobs:
                     patch = 0;
                     incrementType = "major";
                 }
-        
-                // Combine the incremented version components back into a string
+
                 const newVersion = `v${major}.${minor}.${patch}`;
                 
+                core.setOutput("newVersion", newVersion);
+
+                if(incrementType != "")
+                    core.setOutput("makeRelease", true);
+                else
+                    core.setOutput("makeRelease", false)
+
+                console.log(`Increment: ${incrementType}`);
                 console.log(`New version: ${newVersion}`);
                 
-                core.setOutput("newVersion", newVersion);
-                core.setOutput("incrementType", incrementType);
-                console.log(`Increment: ${incrementType}`);
       - name: Release?
-        if: steps.github-script.outputs.incrementType != ''
+        if: steps.github-script.outputs.makeRelease
         run:
             echo 'Release 🔥 ?'
