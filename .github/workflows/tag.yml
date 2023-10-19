@@ -9,6 +9,10 @@ jobs:
     Get-Commit-Name:
         runs-on: ubuntu-latest
         steps:
+            - name: Checkout
+              uses: actions/checkout@v2
+              with:
+                  fetch-depth: 0
             - name: Get commit name
               id: get_commit_name
-              run: echo ::set-output name=commit_name::$(git log -1 --pretty=format:"%s")
+              run: echo "commit_name=$(git log -1 --pretty=format:'%s')" >> $GITHUB_ENV
