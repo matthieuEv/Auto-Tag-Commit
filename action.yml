@@ -1,0 +1,16 @@
+name: 'Tag Creation'
+description: 'This action creates a new tag based on the commit message.'
+branding:
+  icon: 'tag'
+  color: 'gray-dark'
+
+inputs:
+  token:
+    description: 'Token for the repo. This can be passed in using ${{ secrets.GITHUB_TOKEN }}'
+    required: true
+
+runs:
+  using: 'composite'
+  steps:
+    - run: ${{ github.action_path }}/.github/workflows/tag.yml
+      shell: bash
