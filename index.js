@@ -29,7 +29,7 @@ async function run() {
     console.log(`\n🏷️ Latest tag found ➜ ${tags.latest}`);
 
     // Get the previous version and split it into major, minor, and patch
-    const previousVersion = previousTag.split(".").map(Number);
+    const previousVersion = previousTag.replace('v', '').split(".").map(Number);
     let [major, minor, patch] = previousVersion;
 
     // Determine the increment based on the commit name
