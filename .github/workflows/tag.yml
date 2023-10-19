@@ -33,7 +33,7 @@ jobs:
         with:
           name: commit-name
       - name: Set commit name
-        run: echo "commit_name=$(cat commit_name.txt)" >> $GITHUB_ENV
+        run: echo "$(cat commit_name.txt)" >> $GITHUB_ENV
       - name: Checkout
         uses: actions/checkout@v2
         with:
@@ -47,15 +47,51 @@ jobs:
         id: github-script
         uses: actions/github-script@v2.1.0
         with:
-          script: |
-            const commitName = process.env.commit_name;
-            console.log(`Commit name: ${commitName}`);
-            let increment = "";
-            if (commitName.startsWith("fix:")) {
-                increment = "0.0.1"; // patch
-            } else if (commitName.startsWith("feat:")) {
-                increment = "0.1.0"; // minor
-            } else if (commitName.startsWith("BREAKING CHANGE:")) {
-                increment = "1.0.0"; // major
-            }
-            console.log(`Increment: ${increment}`);
+            script: |
+                const commitName = process.env.commit_name;
+                console.log(`Commit name: ${commitName}`);
+                
+                // Get the previous version and split it into major, minor, and patch
+                const previousVersion = steps.previoustag.outputs.tag.split('.').map(Number);
+                let [major, minor, patch] = previousVersion;
+        
+                // Determine the increment based on the commit name
+                let incrementType = "";
+                if (commitName.startsWith("fix:")) {
+                    patch += 1; // Increment patch
+                    incrementType = "patch";
+                } else if (commitName.startsWith("feat:")) {
+                    minor += 1; // Increment minor and reset patch to 0
+                    patch = 0;
+                    incrementType = "minor";
+                } else if (commitName.startsWith("BREAKING CHANGE:")) {
+                    major += 1; // Increment major and reset minor and patch to 0
+                    minor = 0;
+                    patch = 0;
+                    incrementType = "major";
+                }
+        
+                // Combine the incremented version components back into a string
+                const newVersion = `v${major}.${minor}.${patch}`;
+                
+                console.log(`New version: ${newVersion}`);
+                
+                core.setOutput("newVersion", newVersion);
+                core.setOutput("incrementType", incrementType);
+
+  Make-release:
+    needs: Create-Tag
+    runs-on: ubuntu-latest
+    if: ${{ needs.Create-Tag.outputs.incrementType != '' }}
+    steps:
+      - name: Checkout
+        uses: actions/checkout@v2
+        with:
+            fetch-depth: 0
+      - name: Create release
+        run:
+            echo "Its making a Release"
+
+
+        #   - name: Create tag
+        #     uses: matt/matt@v1
