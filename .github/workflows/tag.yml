@@ -84,3 +84,8 @@ jobs:
                 }
 
                 console.log(`New version: ${newVersion}`);
+
+    #   - name: Release?
+    #     if: steps.github-script.outputs.makeRelease
+    #     run:
+    #         echo 'Release 🔥 ?'
