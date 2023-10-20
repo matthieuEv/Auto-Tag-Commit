@@ -1,4 +1,4 @@
-name: 'Tag Creation'
+name: 'Auto Tag Commit'
 author: 'matthieuEv'
 description: 'This action creates a new tag based on the commit message.'
 branding:
