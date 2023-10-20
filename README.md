@@ -1,9 +1,3 @@
-<div align="center">
-    <img src="./icon.png" width="50" alt="Logo">
-</div>
-
-# Auto Tag Commit
-
 An easy way to manage tag using Commits name for Releases in a project.
 
 ## How to use
