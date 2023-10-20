@@ -51,9 +51,9 @@ The action will check the commit name and if it contains a certain patern, it wi
 
 | Patern | Description | Increase |
 | --- | --- | --- |
-| `patch: ` | Increase the patch version | `v0.0.1` |
-| `minor: ` | Increase the minor version | `v0.1.0` |
-| `major: ` | Increase the major version | `v1.0.0` |
+| `patch: <your commit>` | Increase the patch version | `v0.0.1` |
+| `minor: <your commit>` | Increase the minor version | `v0.1.0` |
+| `major: <your commit>` | Increase the major version | `v1.0.0` |
 
 #### Example
 
