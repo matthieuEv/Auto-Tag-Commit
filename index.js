@@ -34,14 +34,14 @@ async function run() {
 
     // Determine the increment based on the commit name
     let incrementType = "";
-    if (commitName.startsWith("fix:")) {
+    if (commitName.startsWith("patch:")) {
       patch += 1; // Increment patch
       incrementType = "patch";
-    } else if (commitName.startsWith("feat:")) {
+    } else if (commitName.startsWith("minor:")) {
       minor += 1; // Increment minor and reset patch to 0
       patch = 0;
       incrementType = "minor";
-    } else if (commitName.startsWith("BREAKING CHANGE:")) {
+    } else if (commitName.startsWith("major:")) {
       major += 1; // Increment major and reset minor and patch to 0
       minor = 0;
       patch = 0;
