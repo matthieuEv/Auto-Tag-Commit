@@ -12,11 +12,11 @@ In your `yml` file, add the following step:
 
 ### Outputs
 
-| Name | Description | Need Commit Asked |
+| Name | Description | --- |
 | --- | --- | --- |
-| `steps.tag-creation.outputs.makeRelease` | A Bool if the commit ask for a release | ❌ |
-| `steps.tag-creation.outputs.commitName` | The name of the commit | ✅ |
-| `steps.tag-creation.outputs.newVersion` | The name of the new version | ✅ |
+| `steps.tag-creation.outputs.makeRelease` | A Bool if the commit ask for a release | Needed for the `if` |
+| `steps.tag-creation.outputs.commitName` | The name of the commit |  |
+| `steps.tag-creation.outputs.newVersion` | The name of the new version |  |
 
 #### Example
 
